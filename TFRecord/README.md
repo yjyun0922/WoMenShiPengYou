@@ -1,11 +1,9 @@
 &&&&&&&&&&&&&&&&&&&&&&&&&&&&&& HOW TO USE &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 FILL OUT THE PARAMETERS [YOU WILL SEE THE INSTRUCTION #FILL THIS OUT#] 
 //save_to_tfrecord.py//
-	TEXT_LOCATION_LABEL (path to the file containing a list of images and 
-						their addresses)
-	TEXT_LOCATION_BBOX (path to the file containing a list of path to images 
-						and their bounding box coordinates)
-	TEXT_LOCATION_CAT (path to the file containing a list of integer labels 				   and their corresponding string names)
+	TEXT_LOCATION_LABEL (path to the file containing a list of images and their addresses)
+	TEXT_LOCATION_BBOX (path to the file containing a list of path to images and their bounding box coordinates)
+	TEXT_LOCATION_CAT (path to the file containing a list of integer labels and their corresponding string names)
 	TFRECORD_NAME (the name of the TFRecord file that will be produced) 
 //read_tfrecord.py//
 	record (the name of the TFRecord file that will be read)
@@ -54,20 +52,16 @@ FILL OUT THE PARAMETERS [YOU WILL SEE THE INSTRUCTION #FILL THIS OUT#]
 	Opens a new session, enabling us to actually create the batches of images and plot them. 
 
 &&&&&&&&&&&&&&&&&&&&&&&&&&&&& (5) CITATIONS &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
-(%) https://github.com/aymericdamien/TensorFlow-Examples/blob/master/
-    examples/5_DataManagement/build_an_image_dataset.py
+(%) https://github.com/aymericdamien/TensorFlow-Examples/blob/master/examples/5_DataManagement/build_an_image_dataset.py
     (explains how to read from text files)
-(%) https://towardsdatascience.com/how-to-train-your-own-object-detector-with
-    -tensorflows-object-detector-api-bec72ecfe1d9
+(%) https://towardsdatascience.com/how-to-train-your-own-object-detector-with-tensorflows-object-detector-api-bec72ecfe1d9
     (really helpful explanation of object detection)
-(%) https://github.com/tensorflow/models/blob/master/research/object_
-    detection/g3doc/using_your_own_dataset.md
+(%) https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/using_your_own_dataset.md
     (a detailed list of the Features contained in the Example, especially for object detection)
     (official instruction written by TensorFlow developers)
-(%) https://stackoverflow.com/ 
-    questions/49986522/read-data-from-tfrecord-file-used-in-object-detection-api
+(%) https://stackoverflow.com/questions/49986522/read-data-from-tfrecord-file-used-in-object-detection-api
     (really helpful step-by-step guide on saving to TFRecord and reading TFRecord for object detection)
-(%) http://machinelearninguru.com/deep_learning/tensorflow/basics/tfrecord/    tfrecord.html
+(%) http://machinelearninguru.com/deep_learning/tensorflow/basics/tfrecord/tfrecord.html
 	(good explanation of saving to TFRecord and reading TFRecord)
 	(good explanation of the concepts of protocal buffer, examples, features, and serialization)
 	(not specifically for object detection)# WoMenShiPengYou
