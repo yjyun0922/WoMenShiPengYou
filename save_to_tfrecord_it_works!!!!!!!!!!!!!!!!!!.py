@@ -3,17 +3,17 @@ import itertools
 import cv2 as cv
 import numpy as np  
 import tensorflow as tf
-import matplotlib.pyplot as plt 
-#FILL THIS OUT#
-PATH_TO_FILES = '/home/young-joo/Desktop/obj_detection/' 
+import matplotlib.pyplot as plt
+
+#PLEASE HAVE ALL THE FILES YOU NEED TOGETHER IN ONE FILE# 
+#FILL IN THE PATH TO THE FOLDER THAT CONTAINS ALL OF YOUR FILES#
+PATH_TO_FILES = '/home/young-joo/Desktop/obj_detection/'
+ 
+#YOU DON'T NEED TO CHANGE ANY OF THIS 
 TEXT_LOCATION_LABEL = PATH_TO_FILES + 'list_category_img.txt' 
 TEXT_LOCATION_BBOX = PATH_TO_FILES + 'list_bbox.txt'
 TEXT_LOCATION_CAT = PATH_TO_FILES + 'list_category_cloth.txt'
 TEXT_LOCATION_PART = PATH_TO_FILES + 'list_eval_partition.txt'
-TFRECORD_NAME = 'tfrecord_is_great'
-
-#save my address as a parameter to avoid having to retype it all the time 
-
 
 def label_list_partitioned(text_location_label, text_location_part): 
         our_file = open(text_location_label, 'r')
@@ -33,8 +33,7 @@ def label_list_partitioned(text_location_label, text_location_part):
         validating = []
         validating.append([])
         validating.append([])
-        validating.append([])
-	
+        validating.append([])	
         for counter in range(2, len(our_file), 1):  
 		our_string = "".join(our_file[counter])
                 partition_string = "".join(partition_file[counter])
@@ -57,8 +56,8 @@ def label_list_partitioned(text_location_label, text_location_part):
     		    testing[2].append(file_name)
                 else:
                     assert (0)
-
 	return training, testing, validating
+
 def label_list(text_location_label): 
 	images_addr = list()
 	labels = list()
@@ -73,7 +72,6 @@ def label_list(text_location_label):
 		file_name = PATH_TO_FILES + our_string[0]
 		files_name.append(file_name)
 	return images_addr, labels, files_name 
-
 def bbox_list_partitioned(text_location_bbox, text_location_part): 
         our_file = open(text_location_bbox, 'r')
 	our_file = our_file.read().splitlines()
@@ -104,7 +102,6 @@ def bbox_list_partitioned(text_location_bbox, text_location_part):
         validating_ymaxs = []
         validating_bboxs = (validating_xmins, validating_xmaxs, validating_ymins, validating_ymaxs)
         validating.append(validating_bboxs)
-
         for counter in range(2, len(our_file), 1):
 		our_string = "".join(our_file[counter])
                 partition_string = "".join(partition_file[counter])
