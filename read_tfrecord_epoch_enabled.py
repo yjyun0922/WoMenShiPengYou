@@ -8,8 +8,8 @@ import tensorflow as tf
 
 #FILL THIS OUT# 
 record = 'validation'
-BATCH_SIZE = 15
-NUM_BATCH = 1
+BATCH_SIZE = 5
+NUM_BATCH = 3
 
 def read_and_decode(tfrecords_file, batch_size):
     filename_queue = tf.train.string_input_producer([tfrecords_file], shuffle=True, num_epochs=1)
@@ -38,8 +38,8 @@ def read_and_decode(tfrecords_file, batch_size):
     image = tf.decode_raw(features['image/encoded'], tf.uint8)
     image = tf.reshape(image, tf.stack([height, width, 3]))
     resized_image = tf.image.resize_image_with_crop_or_pad(image=image, 
-                                            target_height=300,
-                                            target_width=300)
+                                            target_height=299,
+                                            target_width=299)
     images, labels = tf.train.shuffle_batch([resized_image, label], 
                                                 batch_size = BATCH_SIZE,
                                                 num_threads = 1, 
