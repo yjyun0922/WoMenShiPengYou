@@ -1,4 +1,4 @@
-# #6th July deep fashion meeting log
+## 6th July deep fashion meeting log
 Because the dataset is too big to convert into tfrecord, the swp memory is full and the computer got frozen. 
 → Asked Brandon for help…. Other problems related to the dataset are discussed:
 
@@ -8,4 +8,9 @@ Because the dataset is too big to convert into tfrecord, the swp memory is full 
 ##### (b)Some of the images have people in it: this will probably make the model confused. The model may misunderstand that the person in the image is an important feature of the clothing and cause misclassification.  
 
 # 2. The ultimate goal:
-#####   Brandon said that the ultimate goal is to construct a recommendation system that can first identify the style of the person according to what the person is wearing. Then recommend other pieces of clothing that the person may be interested in buying. But in order to do recommendations, detection must be done. So our goal is to first detect the clothing, since detection also gives us the information of what class the article of clothing it belongs to.)))))
+#####   Brandon said that the ultimate goal is to construct a recommendation system that can first identify the style of the person according to what the person is wearing. Then recommend other pieces of clothing that the person may be interested in buying. But in order to do recommendations, detection must be done. So our goal is to first detect the clothing, since detection also gives us the information of what class the article of clothing it belongs to.
+------------
+##### July 6th update: 
+##### 1.(a)The data is not actually that poorly organized, Brandon didn't know that the dataset has the "50 categories label". So we agreed on just use the 50-category-label.
+##### 1.(b)We decided to ignore this effect. There are 2 reasons: First, most of the images have humans in it. Only a very small minority of the images are clothing only. Second, those images with no humans in it may not affect the performance of the model if they are testing set. In addition, this may not count as a reason lol, it will take forever to relabel the data manually.
+##### We finally get the tfrecord script to work. So now the data is ready and is partitioned into TRAINING, VALIDATION, and TESTING and are in the tfrecord format. 
