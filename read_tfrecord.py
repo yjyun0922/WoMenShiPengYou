@@ -7,12 +7,12 @@ import matplotlib.pyplot as plt
 import tensorflow as tf
 
 #FILL THIS OUT# 
-record = 'validation'
-BATCH_SIZE = 100
-NUM_BATCH = 5
+file_names = ['cat1', 'cat2', 'cat3', 'training', 'testing', 'validation']
+BATCH_SIZE = 20
+NUM_BATCH = 1
 
 def read_and_decode(tfrecords_file, batch_size):
-    filename_queue = tf.train.string_input_producer([tfrecords_file], shuffle=True, num_epochs=2)
+    filename_queue = tf.train.string_input_producer([tfrecords_file], shuffle=True, num_epochs=1)
     reader = tf.TFRecordReader()
     _, serialized_example = reader.read(filename_queue)
     features = tf.parse_single_example(
@@ -38,8 +38,8 @@ def read_and_decode(tfrecords_file, batch_size):
     image = tf.decode_raw(features['image/encoded'], tf.uint8)
     image = tf.reshape(image, tf.stack([height, width, 3]))
     resized_image = tf.image.resize_image_with_crop_or_pad(image=image, 
-                                            target_height=299,
-                                            target_width=299)
+                                            target_height=300,
+                                            target_width=300)
     images, labels = tf.train.shuffle_batch([resized_image, label], 
                                                 batch_size = BATCH_SIZE,
                                                 num_threads = 1, 
@@ -48,24 +48,36 @@ def read_and_decode(tfrecords_file, batch_size):
 						allow_smaller_final_batch=True)
     return images, labels  
 
-images, labels = read_and_decode(record, batch_size=BATCH_SIZE)
-
 def plot_images(images, labels): 
-    for i in np.arange(0, BATCH_SIZE): 
-        plt.subplot(10, 10, i+1)
-        plt.axis('off')
-        plt.imshow(images[i])
-        plt.title(labels[i])
+    if len(images) < BATCH_SIZE:
+        for i in np.arange(0, len(images)): 
+            plt.subplot(10, 10, i+1)
+            plt.axis('off')
+            plt.imshow(images[i])
+            plt.title(labels[i])
+    else:
+        for i in np.arange(0, BATCH_SIZE): 
+            plt.subplot(10, 10, i+1)
+            plt.axis('off')
+            plt.imshow(images[i])
+            plt.title(labels[i])
     plt.show()
 
-with tf.Session() as sess:
-    sess.run(tf.local_variables_initializer())
-    sess.run(tf.global_variables_initializer()) 
-    coord = tf.train.Coordinator()
-    threads = tf.train.start_queue_runners(coord=coord)
-    for i in range(NUM_BATCH):  
-        image_plot, label_plot = sess.run([images, labels])
-        plot_images(image_plot, label_plot)
-    print "Decoded Successfully"
-    coord.request_stop()
-    coord.join(threads)
+def run(filename, batchsize, numbatch):
+    images, labels = read_and_decode(filename, batch_size=batchsize)
+
+    with tf.Session() as sess: 
+        sess.run(tf.local_variables_initializer())
+        sess.run(tf.global_variables_initializer()) 
+        coord = tf.train.Coordinator()
+        threads = tf.train.start_queue_runners(coord=coord)
+        for i in range(numbatch): 
+            image_plot, label_plot = sess.run([images, labels])
+            plot_images(image_plot, label_plot)
+        print "Decoded Successfully"
+        coord.request_stop()
+	coord.join(threads)
+
+for name in file_names:
+    print("running file:", 'training')
+    run(name, BATCH_SIZE, NUM_BATCH)
