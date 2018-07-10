@@ -52,7 +52,6 @@ Comment 2: If we have the time, we could try varying the original data set while
 	- faster rcnn inception resnet v2 atrous 
 	- faster rcnn inception resnet vs atrous lowproposals  
 
-
 #####What to Keep in Mind
 - cannot arbitrarily take out Conv layers from the pretrained network 
 - can change the spatial size of the images b/c the layers are independent of image sizes
