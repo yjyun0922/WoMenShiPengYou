@@ -1,0 +1,200 @@
+item {
+   id:1
+   name:'Anorak'
+}
+item {
+   id:2
+   name:'Blazer'
+}
+item {
+   id:3
+   name:'Blouse'
+}
+item {
+   id:4
+   name:'Bomber'
+}
+item {
+   id:5
+   name:'Button-Down'
+}
+item {
+   id:6
+   name:'Cardigan'
+}
+item {
+   id:7
+   name:'Flannel'
+}
+item {
+   id:8
+   name:'Halter'
+}
+item {
+   id:9
+   name:'Henley'
+}
+item {
+   id:10
+   name:'Hoodie'
+}
+item {
+   id:11
+   name:'Jacket'
+}
+item {
+   id:12
+   name:'Jersey'
+}
+item {
+   id:13
+   name:'Parka'
+}
+item {
+   id:14
+   name:'Peacoat'
+}
+item {
+   id:15
+   name:'Poncho'
+}
+item {
+   id:16
+   name:'Sweater'
+}
+item {
+   id:17
+   name:'Tank'
+}
+item {
+   id:18
+   name:'Tee'
+}
+item {
+   id:19
+   name:'Top'
+}
+item {
+   id:20
+   name:'Turtleneck'
+}
+item {
+   id:21
+   name:'Capris'
+}
+item {
+   id:22
+   name:'Chinos'
+}
+item {
+   id:23
+   name:'Culottes'
+}
+item {
+   id:24
+   name:'Cutoffs'
+}
+item {
+   id:25
+   name:'Gauchos'
+}
+item {
+   id:26
+   name:'Jeans'
+}
+item {
+   id:27
+   name:'Jeggings'
+}
+item {
+   id:28
+   name:'Jodhpurs'
+}
+item {
+   id:29
+   name:'Joggers'
+}
+item {
+   id:30
+   name:'Leggings'
+}
+item {
+   id:31
+   name:'Sarong'
+}
+item {
+   id:32
+   name:'Shorts'
+}
+item {
+   id:33
+   name:'Skirt'
+}
+item {
+   id:34
+   name:'Sweatpants'
+}
+item {
+   id:35
+   name:'Sweatshorts'
+}
+item {
+   id:36
+   name:'Trunks'
+}
+item {
+   id:37
+   name:'Caftan'
+}
+item {
+   id:38
+   name:'Cape'
+}
+item {
+   id:39
+   name:'Coat'
+}
+item {
+   id:40
+   name:'Coverup'
+}
+item {
+   id:41
+   name:'Dress'
+}
+item {
+   id:42
+   name:'Jumpsuit'
+}
+item {
+   id:43
+   name:'Kaftan'
+}
+item {
+   id:44
+   name:'Kimono'
+}
+item {
+   id:45
+   name:'Nightdress'
+}
+item {
+   id:46
+   name:'Onesie'
+}
+item {
+   id:47
+   name:'Robe'
+}
+item {
+   id:48
+   name:'Romper'
+}
+item {
+   id:49
+   name:'Shirtdress'
+}
+item {
+   id:50
+   name:'Sundress'
+}
