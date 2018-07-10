@@ -15,3 +15,5 @@
 ######  https://research.google.com/ava/ 
 
 ###### We have to choose which model to use for our dataset to do transfer learning. From this article, https://www.kaggle.com/shivamb/imaterialist-fashion-eda-object-detection-colors/notebook, I see that they have a smaller dataset and transfers from models trained on COCO. So I figure we could also use models  pretrained on COCO.
+
+
