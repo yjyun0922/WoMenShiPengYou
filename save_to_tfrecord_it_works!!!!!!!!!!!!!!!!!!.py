@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 
 #PLEASE HAVE ALL THE FILES YOU NEED TOGETHER IN ONE FILE# 
 #FILL IN THE PATH TO THE FOLDER THAT CONTAINS ALL OF YOUR FILES#
-PATH_TO_FILES = '/home/young-joo/Desktop/obj_detection/'
+PATH_TO_FILES = '/home/waynelin/Desktop/fashion/data/'
  
 #YOU DON'T NEED TO CHANGE ANY OF THIS 
 TEXT_LOCATION_LABEL = PATH_TO_FILES + 'list_category_img.txt' 
@@ -158,13 +158,16 @@ def save_to_record(images_addr, labels, files_name, bboxs, cats, option = None):
             filename = option
 	writer = tf.python_io.TFRecordWriter(filename)
 	length = len(images_addr)
-	count = 0 
+	count = 0
 	for i in range(length):
 		if count % 1000 == 0: 
 			print("%d out of %d saved" % (count, length)) 
 		image = cv.imread(PATH_TO_FILES + images_addr[i])
 		image = cv.cvtColor(image, cv.COLOR_BGR2RGB)
 		(h, w) = image.shape[:2]
+                ######Adding this two lines to try
+		with tf.gfile.GFile(PATH_TO_FILES+images_addr[i], 'rb') as fid:
+			encoded_jpg = fid.read()
 
 		label_num = labels[i]
 		example = tf.train.Example(features=tf.train.Features(feature={
@@ -172,7 +175,7 @@ def save_to_record(images_addr, labels, files_name, bboxs, cats, option = None):
   			'image/width': int64_feature(w),
   			'image/filename': bytes_feature(files_name[i].encode()),
   			'image/source_id': bytes_feature(files_name[i].encode()),
-  			'image/encoded': bytes_feature(image.tostring()),
+  			'image/encoded': bytes_feature(encoded_jpg),
   			'image/format': bytes_feature(b'jpg'),
       		'image/object/bbox/xmin': float_list_feature([bboxs[0][i] / w]),
       		'image/object/bbox/xmax': float_list_feature([bboxs[1][i] / w]),
@@ -200,7 +203,7 @@ if __name__ == '__main__':
                              training_label[2],#files_name 
                              training_bbox[0], #bbox
                              cats, 
-                             'training') #option
+                             'training_jpg') #option
 
     ########GENERATE TESTING DATA########
     example = save_to_record(testing_label[0],#images_addr 
@@ -208,7 +211,7 @@ if __name__ == '__main__':
                              testing_label[2],#files_name 
                              testing_bbox[0],#bboxs
                              cats, 
-                             'testing') #option
+                             'testing_jpg') #option
 
     ########GENERATE VALIDATION DATA########
     example = save_to_record(validating_label[0],#images_addr 
@@ -216,5 +219,5 @@ if __name__ == '__main__':
                              validating_label[2],#files_name 
                              validating_bbox[0], #bboxs
                              cats, 
-                             'validation') #option
+                             'validation_jpg') #option
     print "Test Successful"
