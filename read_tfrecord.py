@@ -7,12 +7,12 @@ import matplotlib.pyplot as plt
 import tensorflow as tf
 
 #FILL THIS OUT# 
-file_names = ['cat1', 'cat2', 'cat3', 'training', 'testing', 'validation']
-BATCH_SIZE = 20
+file_names = ['training_jpg']
+BATCH_SIZE = 5
 NUM_BATCH = 1
 
 def read_and_decode(tfrecords_file, batch_size):
-    filename_queue = tf.train.string_input_producer([tfrecords_file], shuffle=True, num_epochs=1)
+    filename_queue = tf.train.string_input_producer([tfrecords_file], shuffle=True, num_epochs=5)
     reader = tf.TFRecordReader()
     _, serialized_example = reader.read(filename_queue)
     features = tf.parse_single_example(
@@ -35,7 +35,7 @@ def read_and_decode(tfrecords_file, batch_size):
     text = tf.cast(features['image/object/class/text'], tf.string)
     height = tf.cast(features['image/height'], tf.int32)
     width = tf.cast(features['image/width'], tf.int32)
-    image = tf.decode_raw(features['image/encoded'], tf.uint8)
+    image = tf.image.decode_jpeg(features['image/encoded'])
     image = tf.reshape(image, tf.stack([height, width, 3]))
     resized_image = tf.image.resize_image_with_crop_or_pad(image=image, 
                                             target_height=300,
@@ -78,6 +78,4 @@ def run(filename, batchsize, numbatch):
         coord.request_stop()
 	coord.join(threads)
 
-for name in file_names:
-    print("running file:", 'training')
-    run(name, BATCH_SIZE, NUM_BATCH)
+run('training_jpg', BATCH_SIZE, NUM_BATCH)
