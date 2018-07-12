@@ -182,7 +182,7 @@ def save_to_record(images_addr, labels, files_name, bboxs, cats, option = None):
       		'image/object/bbox/xmax': float_list_feature([bboxs[1][i] / w]),
       		'image/object/bbox/ymin': float_list_feature([bboxs[2][i] / h]),
       		'image/object/bbox/ymax': float_list_feature([bboxs[3][i] / h]),
-      		'image/object/class/text': bytes_feature(cats[label_num].encode()),
+      		'image/object/class/text': bytes_feature(cats[label_num-1].encode()),
       		'image/object/class/label': int64_feature(labels[i])
 		}))
 		writer.write(example.SerializeToString())
