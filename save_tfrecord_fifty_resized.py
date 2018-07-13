@@ -72,6 +72,7 @@ def label_list(text_location_label):
 		file_name = PATH_TO_FILES + our_string[0]
 		files_name.append(file_name)
 	return images_addr, labels, files_name 
+	
 def bbox_list_partitioned(text_location_bbox, text_location_part): 
         our_file = open(text_location_bbox, 'r')
 	our_file = our_file.read().splitlines()
@@ -165,11 +166,10 @@ def save_to_record(images_addr, labels, files_name, bboxs, cats, option = None):
 		image = cv.imread(PATH_TO_FILES + images_addr[i])
 		image = cv.cvtColor(image, cv.COLOR_BGR2RGB)
 		(h, w) = image.shape[:2]
-		image = tf.image.resize_images(image, [299, 299])
                 ######Adding this two lines to try
-		with tf.gfile.GFile(PATH_TO_FILES+images_addr[i], 'rb') as fid:
+		split = images_addr[i].split(".")
+		with tf.gfile.GFile(PATH_TO_FILES + split[0] + "revised.jpg", 'rb') as fid:
 			encoded_jpg = fid.read()
-
 		label_num = labels[i]
 		example = tf.train.Example(features=tf.train.Features(feature={
 			'image/height': int64_feature(299),
