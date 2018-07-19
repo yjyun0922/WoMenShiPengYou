@@ -30,10 +30,10 @@ def create_list(text_location_label, keyword):
 	our_file = our_file.read().splitlines()
 	donefile = open(PATH_TO_FILES + "original.txt", "w+")
 	i = 1
-	for our in our_file:   
+	for our in our_file[2:]:   
 		our_string = "".join(our)
 		our_string = our_string.split()
-		address = PATH_TO_FILES + our_string[0] 
+		address = our_string[0]
 		if "_"+keyword in address:
 			print "%d" % i
 			donefile.write(our+"\n")
