@@ -4,7 +4,8 @@ import cv2 as cv
 import numpy as np  
 import PIL 
 from PIL import Image 
-
+import matplotlib.pyplot as plt 
+from scipy import misc
 #Prerequisite:
 #The folder in which you deleted images should be contained inside a folder caled img
 #in the same directory as the one img is in, create text file called original.txt
@@ -17,17 +18,17 @@ from PIL import Image
 
 #PLEASE HAVE ALL THE FILES YOU NEED TOGETHER IN ONE FILE# 
 #FILL IN THE PATH TO THE FOLDER THAT CONTAINS ALL OF YOUR FILES#
-PATH_TO_FILES = '/home/kelsonl/Desktop/Dataset/'
-what_to_find = "CATEGORY_GOES_HERE"
+PATH_TO_FILES = '/home/waynelin/Desktop/fashion/data/'
+what_to_find = "Tee"
  
 #YOU DON'T NEED TO CHANGE ANY OF THIS 
-TEXT_LOCATION_LABEL = PATH_TO_FILES + 'bbox_list.txt'
+TEXT_LOCATION_LABEL = PATH_TO_FILES + 'list_bbox.txt'
 TEXT_LOCATION_LABEL2 = PATH_TO_FILES + 'original.txt'
 
 def create_list(text_location_label, keyword): 
 	our_file = open(text_location_label, 'r')
 	our_file = our_file.read().splitlines()
-	donefile = open(PATH_TO_FILES + "original.txt", "w")
+	donefile = open(PATH_TO_FILES + "original.txt", "w+")
 	i = 1
 	for our in our_file:   
 		our_string = "".join(our)
@@ -59,6 +60,44 @@ def rename_image(text_location_label, keyword):
 		else: 
 			continue
 	donefile.close()	
-
-create_list(TEXT_LOCATION_LABEL, what_to_find)
-rename_image(TEXT_LOCATION_LABEL2, what_to_find)
+def visualizeBB(text_location_label):
+    our_file = open(text_location_label, 'r')
+    our_file = our_file.read().splitlines()
+    for our in our_file:
+        our_string ="".join(our)
+        our_string = our_string.split()
+        address = PATH_TO_FILES + our_string[0]
+        print address
+        if os.path.isfile(address) == True:
+            x1 = int(our_string[1])
+            x2 = int(our_string[3])
+            y1 = int(our_string[2])
+            y2 = int(our_string[4])
+            x1 -=1
+            x2 -=1
+            y1 -=1
+            y2 -=1
+            print x1, x2, y1, y2
+            f = misc.imread(address)
+            f[y1:y1+3,x1:x2,0] = 255
+            f[y1:y1+3,x1:x2,1] = 0
+            f[y1:y1+3,x1:x2,2] = 0
+            
+            f[y2-3:y2,x1:x2,0] = 255
+            f[y2-3:y2,x1:x2,1] = 0
+            f[y2-3:y2,x1:x2,2] = 0
+            
+            f[y1:y2,x1:x1+3,0] = 255
+            f[y1:y2,x1:x1+3,1] = 0
+            f[y1:y2,x1:x1+3,2] = 0
+            
+            f[y1:y2,x2-3:x2,0] = 255
+            f[y1:y2,x2-3:x2,1] = 0
+            f[y1:y2,x2-3:x2,2] = 0
+            plt.imshow(f)
+            plt.show()
+        else:
+            print "file doesn't exist"
+#create_list(TEXT_LOCATION_LABEL, what_to_find)
+#rename_image(TEXT_LOCATION_LABEL2, what_to_find)
+visualizeBB(TEXT_LOCATION_LABEL)
