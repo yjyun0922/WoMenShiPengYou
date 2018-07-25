@@ -1,0 +1,20 @@
+18 
+category_name                   label 
+cardigan  			1
+blazer				2
+outerwear			3
+hoodie				4
+sweater				5
+miscellaneous_long_sleeve_top 	6
+short_sleeve_top		7
+sleeveless_top			8
+long_full_body_wear     	9
+short_full_body_wear		10
+baggy_pants			11
+jeans				12
+long_exercise_pants		13
+miscellaneous_long_pants	14
+hotpants			15
+miscellaneous_shorts		16
+miniskirt			17
+miscellaneous_skirt 		18
